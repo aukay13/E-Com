@@ -9,11 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateProductResponseDTO {
-    private long id;
+public class FakeStoreRequestDTO {
     private String title;
-    private String detail;
-    private double cost;
+    private String description;
+    private double price;
     private String image;
-    private String categoryName;
+    private String category;
 }

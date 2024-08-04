@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/products/")
 public class ProductController {
 
-    private ProductService productService;
+    private final ProductService productService;
 
     public ProductController(ProductService productService){
         this.productService = productService;
@@ -20,7 +20,9 @@ public class ProductController {
 
     @PostMapping("")
     public @ResponseBody CreateProductResponseDTO createProduct(@RequestBody CreateProductRequestDTO createProductRequestDTO){
+
         Product product = productService.createProduct(createProductRequestDTO.toProduct());
+
         return CreateProductResponseDTO.builder()
                 .id(product.getId())
                 .detail(product.getDescription())

@@ -15,6 +15,7 @@ public class CreateProductRequestDTO {
     private String detail;
     private double cost;
     private String image;
+    private String categoryName;
 
     public Product toProduct(){
         return Product.builder()
