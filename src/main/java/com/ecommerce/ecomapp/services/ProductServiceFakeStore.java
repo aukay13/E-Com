@@ -5,7 +5,12 @@ import com.ecommerce.ecomapp.models.Product;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-@Service
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
+
+@Service("FakeStoreProductService")
 public class ProductServiceFakeStore implements ProductService{
 
     private final RestTemplate restTemplate;
@@ -31,5 +36,23 @@ public class ProductServiceFakeStore implements ProductService{
 
         return fakeStoreResponseDTO.toProduct();
 
+    }
+
+    @Override
+    public List<Product> getAllProducts(){
+        FakeStoreResponseDTO[] response = restTemplate.getForObject(
+                "https://fakestoreapi.com/products",
+                FakeStoreResponseDTO[].class
+        );
+
+//        List<FakeStoreResponseDTO> fakeStoreResponseDTOS = Stream.of(response).toList();
+
+        List<Product> products = new ArrayList<>();
+
+        for(FakeStoreResponseDTO fakeStoreResponseDTO: response){
+            products.add(fakeStoreResponseDTO.toProduct());
+        }
+
+        return products;
     }
 }

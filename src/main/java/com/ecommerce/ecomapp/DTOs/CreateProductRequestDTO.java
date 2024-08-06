@@ -18,6 +18,7 @@ public class CreateProductRequestDTO {
     private String categoryName;
 
     public Product toProduct(){
+
         return Product.builder()
                 .title(this.title)
                 .price(this.cost)

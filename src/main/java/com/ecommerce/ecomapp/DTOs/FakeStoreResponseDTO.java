@@ -19,6 +19,7 @@ public class FakeStoreResponseDTO {
     private String category;
 
     public Product toProduct(){
+
         return Product.builder()
                 .id(this.getId())
                 .title(this.getTitle())
