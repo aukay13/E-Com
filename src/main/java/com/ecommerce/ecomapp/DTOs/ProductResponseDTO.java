@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateProductResponseDTO {
+public class ProductResponseDTO {
     private long id;
     private String title;
     private String detail;
@@ -18,8 +18,8 @@ public class CreateProductResponseDTO {
     private String image;
     private String categoryName;
 
-    public static CreateProductResponseDTO from(Product product){
-        CreateProductResponseDTO responseDTO = new CreateProductResponseDTO();
+    public static ProductResponseDTO from(Product product){
+        ProductResponseDTO responseDTO = new ProductResponseDTO();
         responseDTO.id = product.getId();
         responseDTO.title = product.getTitle();;
         responseDTO.detail = product.getDescription();

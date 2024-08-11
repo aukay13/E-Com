@@ -16,4 +16,29 @@ public class ProductServiceDatabase implements ProductService{
     public List<Product> getAllProducts() {
         return null;
     }
+
+    @Override
+    public Product getSingleProduct(Long id) {
+        return null;
+    }
+
+    @Override
+    public List<String> getAllCategories() {
+        return null;
+    }
+
+    @Override
+    public List<Product> getProductsOfCategory(String cname) {
+        return null;
+    }
+
+    @Override
+    public Product UpdateAProduct(Long id, Product product) {
+        return null;
+    }
+
+    @Override
+    public Product deleteAProduct(Long id) {
+        return null;
+    }
 }

@@ -1,13 +1,11 @@
 package com.ecommerce.ecomapp.controllers;
 
 import com.ecommerce.ecomapp.DTOs.CreateProductRequestDTO;
-import com.ecommerce.ecomapp.DTOs.CreateProductResponseDTO;
-import com.ecommerce.ecomapp.DTOs.GetAllProductsResponseDTO;
+import com.ecommerce.ecomapp.DTOs.GetProductsByCategoryResponseDTO;
+import com.ecommerce.ecomapp.DTOs.ProductResponseDTO;
+import com.ecommerce.ecomapp.DTOs.GetProductsResponseDTO;
 import com.ecommerce.ecomapp.models.Product;
 import com.ecommerce.ecomapp.services.ProductService;
-import com.ecommerce.ecomapp.services.ProductServiceFakeStore;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -24,11 +22,11 @@ public class ProductController {
     }
 
     @PostMapping("")
-    public @ResponseBody CreateProductResponseDTO createProduct(@RequestBody CreateProductRequestDTO createProductRequestDTO){
+    public @ResponseBody ProductResponseDTO createProduct(@RequestBody CreateProductRequestDTO createProductRequestDTO){
 
         Product product = productService.createProduct(createProductRequestDTO.toProduct());
 
-        return CreateProductResponseDTO.builder()
+        return ProductResponseDTO.builder()
                 .id(product.getId())
                 .detail(product.getDescription())
                 .cost(product.getPrice())
@@ -38,21 +36,61 @@ public class ProductController {
     }
 
     @GetMapping("")
-    public @ResponseBody GetAllProductsResponseDTO getAllProducts(){
+    public @ResponseBody GetProductsResponseDTO getAllProducts(){
 
         List<Product> products = productService.getAllProducts();
 
-        GetAllProductsResponseDTO responseDTO = new GetAllProductsResponseDTO();
+        GetProductsResponseDTO responseDTO = new GetProductsResponseDTO();
 
-        List<CreateProductResponseDTO> createProductResponseDTOS = new ArrayList<>();
+        List<ProductResponseDTO> productResponseDTOS = new ArrayList<>();
 
         for (Product p: products){
-            createProductResponseDTOS.add(CreateProductResponseDTO.from(p));
+            productResponseDTOS.add(ProductResponseDTO.from(p));
         }
 
-        responseDTO.setCreateProductResponseDTOS(createProductResponseDTOS);
+        responseDTO.setProductResponseDTOS(productResponseDTOS);
 
         return responseDTO;
 
     }
+
+    @GetMapping("{id}")
+    public ProductResponseDTO getOneProduct(@PathVariable("id") Long id){
+
+        Product product = productService.getSingleProduct(id);
+        return ProductResponseDTO.from(product);
+    }
+
+    @GetMapping("categories")
+    public List<String> getAllCategories(){
+        return productService.getAllCategories();
+    }
+
+    @GetMapping("category/{cname}")
+    public GetProductsByCategoryResponseDTO getProductsOfCategory(@PathVariable("cname")String cname){
+
+        List<Product> productsOfCategory = productService.getProductsOfCategory(cname);
+        GetProductsByCategoryResponseDTO getProductsByCategoryResponseDTO = new GetProductsByCategoryResponseDTO();
+
+        List<ProductResponseDTO> productResponseDTOS = new ArrayList<>();
+        for(Product p : productsOfCategory){
+            productResponseDTOS.add(ProductResponseDTO.from(p));
+        }
+
+        getProductsByCategoryResponseDTO.setProductResponseDTOS(productResponseDTOS);
+        return getProductsByCategoryResponseDTO;
+    }
+
+    @DeleteMapping("{id}")
+    public ProductResponseDTO deleteAProduct(@PathVariable("id") Long id){
+        Product deletedProduct = productService.deleteAProduct(id);
+        return ProductResponseDTO.from(deletedProduct);
+    }
+
+    @PatchMapping("{id}")
+    public ProductResponseDTO updateAProduct(@PathVariable("id")Long id,@RequestBody CreateProductRequestDTO createProductRequestDTO){
+        Product updatedProduct = productService.UpdateAProduct(id,createProductRequestDTO.toProduct());
+        return ProductResponseDTO.from(updatedProduct);
+    }
+
 }

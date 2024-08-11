@@ -1,5 +1,6 @@
 package com.ecommerce.ecomapp.DTOs;
 
+import com.ecommerce.ecomapp.models.Category;
 import com.ecommerce.ecomapp.models.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,13 +21,16 @@ public class FakeStoreResponseDTO {
 
     public Product toProduct(){
 
-        return Product.builder()
-                .id(this.getId())
-                .title(this.getTitle())
-                .description(this.getDescription())
-                .price(this.getPrice())
-                .imageUrl(this.getImage())
-                .categoryName(this.getCategory())
-                .build();
+        Product product = new Product();
+        product.setId(this.getId());
+        product.setTitle(this.getTitle());
+        product.setDescription(this.getDescription());
+        product.setPrice(this.getPrice());
+        product.setImageUrl(this.getImage());
+        Category category1 = new Category();
+        category1.setTitle(this.getCategory());
+        product.setCategory(category1);
+
+        return product;
     }
 }
