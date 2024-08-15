@@ -25,7 +25,7 @@ public class ProductResponseDTO {
         responseDTO.detail = product.getDescription();
         responseDTO.cost = product.getPrice();;
         responseDTO.image = product.getImageUrl();
-        responseDTO.categoryName = product.getCategoryName();
+        responseDTO.categoryName = product.getCategory().getTitle();
         return responseDTO;
     }
 }

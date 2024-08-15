@@ -1,6 +1,7 @@
 package com.ecommerce.ecomapp.services;
 import com.ecommerce.ecomapp.DTOs.FakeStoreRequestDTO;
 import com.ecommerce.ecomapp.DTOs.FakeStoreResponseDTO;
+import com.ecommerce.ecomapp.models.Category;
 import com.ecommerce.ecomapp.models.Product;
 import com.sun.jdi.event.StepEvent;
 import org.springframework.http.HttpEntity;
@@ -74,14 +75,15 @@ public class ProductServiceFakeStore implements ProductService{
     }
 
     @Override
-    public List<String> getAllCategories() {
+    public List<Category> getAllCategories() {
         String[] categories = restTemplate.getForObject(
                 "https://fakestoreapi.com/products/categories",
                 String[].class
 
         );
 
-        return Stream.of(categories).toList();
+//        return Stream.of(categories).toList();
+        return null;
     }
 
     @Override

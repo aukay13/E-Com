@@ -1,5 +1,6 @@
 package com.ecommerce.ecomapp.configs;
 
+import com.ecommerce.ecomapp.DTOs.ErrorResponseDTO;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
@@ -10,5 +11,10 @@ public class ApplicationConfiguration {
     @Bean
     public RestTemplate createRestTemplate(){
         return new RestTemplate();
+    }
+
+    @Bean
+    public ErrorResponseDTO createErrorResponseDTO(){
+        return new ErrorResponseDTO();
     }
 }

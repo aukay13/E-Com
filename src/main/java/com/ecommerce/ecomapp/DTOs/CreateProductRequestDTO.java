@@ -1,5 +1,6 @@
 package com.ecommerce.ecomapp.DTOs;
 
+import com.ecommerce.ecomapp.models.Category;
 import com.ecommerce.ecomapp.models.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,11 +20,15 @@ public class CreateProductRequestDTO {
 
     public Product toProduct(){
 
+        Category category = new Category();
+        category.setTitle(this.categoryName);
+
         return Product.builder()
                 .title(this.title)
                 .price(this.cost)
                 .description(this.detail)
                 .imageUrl(this.image)
+                .category(category)
                 .build();
     }
 }
