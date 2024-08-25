@@ -33,4 +33,10 @@ public class CategoryController {
         }
         return returnValue;
     }
+
+
+//    @GetMapping("all")
+//    public List<Category> getAllCategories(){
+//        return productService.getAllCategories();
+//    }
 }

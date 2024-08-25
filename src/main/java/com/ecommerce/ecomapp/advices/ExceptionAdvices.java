@@ -20,6 +20,4 @@ public class ExceptionAdvices {
         responseDTO.setMessage(e.getMessage());
         return responseDTO;
     }
-
-
 }

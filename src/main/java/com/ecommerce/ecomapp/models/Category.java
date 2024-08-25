@@ -1,8 +1,6 @@
 package com.ecommerce.ecomapp.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,10 +14,8 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 public class Category extends BaseModel{
-
     private String title;
     private String description;
     @OneToMany(mappedBy = "category",fetch = FetchType.LAZY)
     private List<Product> featuredProducts;
-
 }
